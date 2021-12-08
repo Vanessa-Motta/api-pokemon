@@ -15,9 +15,17 @@
   margin: 20px 0;
   justify-content: space-around;
 }
+.btn :hover{
+  -webkit-transform: scale(1.1);  /*isto dar o efeito de zoom nos produtos*/
+  border-radius:50%;
+  transition: 1s ease-in-out;
+  background: #302f2f;
+
+}
+
 
 .btn button {
-  border-style: none;
+ border-style: none;
   padding: 5px 10px;
   margin-right: 10px;
   border-radius: 5px;
@@ -26,5 +34,15 @@
   font-size: 1em;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   font-family: 'Gloria Hallelujah', cursive;
-  cursor: pointer;
+  cursor: pointer; 
+  background: transparent;
+  outline: none;
+  transition: 1s ease-in-out;
+  font-family: 'Gloria Hallelujah', cursive; 
+
+  
+ 
+
+
 }
+
