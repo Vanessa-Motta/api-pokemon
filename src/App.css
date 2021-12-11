@@ -23,9 +23,8 @@
 
 }
 
-
 .btn button {
- border-style: none;
+  border-style: none;
   padding: 5px 10px;
   margin-right: 10px;
   border-radius: 5px;
@@ -38,11 +37,27 @@
   background: transparent;
   outline: none;
   transition: 1s ease-in-out;
-  font-family: 'Gloria Hallelujah', cursive; 
-
   
- 
-
-
 }
+
+.header{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 61px;
+  background-color: black;
+  justify-content: space-evenly;
+  
+}
+
+.link{
+  text-decoration: none;
+  color: rgb(240, 182, 24);
+  font-family: 'Gloria Hallelujah', cursive; 
+  font-size: larger;
+ 
+}
+
 

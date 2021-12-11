@@ -1,10 +1,12 @@
 import React from 'react';
 import typeColors from '../../helpers/typeColors'
 import './style.css';
+import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
 function Card({ pokemon }) {
   return (
     <div className="flip-container">
+      <button className="btn-favorite" type='button'><FcLikePlaceholder style={{ fontSize: '20pt' }} /></button>
       <div className="flipper">
         <div className="front">
           <div className="Card__img">

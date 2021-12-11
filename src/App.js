@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Card from './components/Card';
-import Navbar from './components/NavBar';
 import { getPokemon, getAllPokemon } from './services/pokemon';
-import './App.css';
+import Home from './components/Home';
+import Favorite from './components/Favorite';
 import Footer from './components/Footer';
+import { Routes, Route, Link } from 'react-router-dom';
+import './App.css';
 
 function App() {
   const [pokemonData, setPokemonData] = useState([])
@@ -52,22 +53,16 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <div>
-        {loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> : (
-          <>
-            <div className="btn">
-              <button onClick={prev}>Voltar</button>
-              <button onClick={next}>Próximo</button>
-            </div>
-            <div className="grid-container">
-              {pokemonData.map((pokemon, i) => {
-                return <Card key={i} pokemon={pokemon} />
-              })}
-            </div>
-          </>
-        )}
-      </div>
+      <header className='header'>
+        <Link className='link' to='/Home'>Página Inicial</Link>
+        <Link className='link' to='/Favorite'>Favoritos</Link>
+      </header>
+      <main>
+        <Routes>
+          <Route path='Home' element={< Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
+          <Route path='Favorite' element={<Favorite />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );
