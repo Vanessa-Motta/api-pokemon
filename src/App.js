@@ -51,6 +51,8 @@ function App() {
     setPokemonData(_pokemonData);
   }
 
+  const [favorites, setFavorites] = useState([]);
+
   return (
     <>
       <header className='header'>
@@ -59,8 +61,8 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path='Home' element={< Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
-          <Route path='Favorite' element={<Favorite />} />
+          <Route path='Home' element={<Home favorites={favorites} setFavorites={setFavorites} next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
+          <Route path='Favorite' element={<Favorite favorites={favorites} setFavorites={setFavorites}/>} />
         </Routes>
       </main>
       <Footer />

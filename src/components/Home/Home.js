@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import './style.css';
 
-function Home({loading, prev, next, pokemonData}) {
+function Home({loading, prev, next, pokemonData, favorites, setFavorites}) {
   return (
   <> 
     <div className="Home">
@@ -17,7 +17,7 @@ function Home({loading, prev, next, pokemonData}) {
          </div>
          <div className="grid-container">
            {pokemonData.map((pokemon, i) => {
-             return <Card key={i} pokemon={pokemon} />
+             return <Card key={i} pokemon={pokemon} favorites={favorites} setFavorites={setFavorites} />
            })}
          </div>
        </>
