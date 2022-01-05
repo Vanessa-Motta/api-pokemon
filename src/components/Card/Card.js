@@ -1,26 +1,63 @@
 
 import typeColors from '../../helpers/typeColors'
+import Lottie from 'react-lottie';
 import './style.css';
-import { FcLikePlaceholder, FcLike } from "react-icons/fc";
-import React, { useState } from "react";
+/* import { FcLikePlaceholder, FcLike } from "react-icons/fc"; */
+import React, { useState, useEffect } from "react";
+
+import animationData from '../Card/animation.json'
+
+console.log(animationData);
 
 
 
 function Card({ pokemon, favorites, setFavorites }) {
-
-  
-  function adicionar() {
+  const [isLiked, setLikeState] = useState(false);
+  const [animationState, setAnimationState] = useState({
+    isStopped: true, isPaused: false,
     
+  });
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: false, 
+    animationData: animationData, 
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
+  function LikeButton() {
     if (!favorites.includes(pokemon.name)) setFavorites([...favorites, pokemon.name]);
-    localStorage.setItem('favorites', favorites);
-      console.log(favorites);
+    localStorage.setItem('favorite', favorites);
+    console.log(favorites);
   }
 
- 
   return (
     <div className="flip-container">
-      
-      <button className="btn-favorite" type='button' onClick={() => adicionar(pokemon.name)}><FcLikePlaceholder style={{ fontSize: '20pt' }} /></button>
+
+      <button className="btn-favorite" type='button' onClick={() => {
+        setAnimationState({
+          ...setAnimationState,
+          isStopped: !animationState.isStopped,
+        })
+
+        setLikeState(!isLiked)
+        LikeButton(pokemon.name)
+      }}>{/* <FcLikePlaceholder style={{ fontSize: '20pt' }} /> */}
+      <div className="animation">
+        <Lottie
+          options={defaultOptions}
+          width={50}
+          height={50}
+          direction={animationState.direction}
+          isStopped={animationState.isStopped}
+          isPaused={animationState.isPaused}/>
+      </div>
+        <span>
+          {isLiked ? 1 : 0}
+        </span>
+      </button>
       <div className="flipper">
         <div className="front">
           <div className="Card__img">
@@ -34,7 +71,7 @@ function Card({ pokemon, favorites, setFavorites }) {
 
           <div className="Card__types">
             {
-             (type => {
+              (type => {
                 return (
                   <div className="Card__type" style={{ backgroundColor: typeColors[type.type.name] }}>
                     {type.type.name}
