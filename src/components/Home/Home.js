@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import './style.css';
 
-function Home({loading, prev, next, pokemonData, favorites, setFavorites}) {
+export default function Home({loading, prev, next, pokemonData, favorites, setFavorites}) {
   return (
   <> 
     <div className="Home">
@@ -26,6 +26,3 @@ function Home({loading, prev, next, pokemonData, favorites, setFavorites}) {
    </> 
   );
 }
-
-
-export default Home;

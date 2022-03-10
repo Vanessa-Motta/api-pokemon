@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getPokemon, getAllPokemon } from './services/pokemon';
-import Home from './components/Home';
-import Favorite from './components/Favorite';
-import Footer from './components/Footer';
+import Home from './components/Home/Home';
+import Favorite from './components/Favorite/Favorite';
+import Footer from './components/Footer/Footer';
 import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
-function App() {
+export default function App() {
   const [pokemonData, setPokemonData] = useState([])
   const [nextUrl, setNextUrl] = useState('');
   const [prevUrl, setPrevUrl] = useState('');
@@ -51,7 +51,7 @@ function App() {
     setPokemonData(_pokemonData);
   }
 
-  const [favorites, setFavorites] = useState([]);
+
 
   return (
     <>
@@ -61,8 +61,8 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path='Home' element={<Home favorites={favorites} setFavorites={setFavorites} next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
-          <Route path='Favorite' element={<Favorite favorites={favorites} setFavorites={setFavorites}/>} />
+          <Route path='Home' element={<Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
+          <Route path='Favorite' element={<Favorite />} />
         </Routes>
       </main>
       <Footer />
@@ -70,4 +70,3 @@ function App() {
   );
 }
 
-export default App;

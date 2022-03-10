@@ -3,10 +3,12 @@ import typeColors from '../../helpers/typeColors'
 import Lottie from 'react-lottie';
 import './style.css';
 import animationData from '../Card/animation.json'
+import Favorite from "../Favorite/Favorite";
 
 
-function Card({ pokemon, favorites, setFavorites }) {
+export default function Card({ pokemon }) {
   const [isLiked, setLikeState] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   const [animationState, setAnimationState] = useState({
     isStopped: true, isPaused: false,
     direction: -1,
@@ -17,33 +19,38 @@ function Card({ pokemon, favorites, setFavorites }) {
     autoplay: false,
     animationData: animationData,
     rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice'
+      preserveAspectRatio: 'xMidYMid slice'
     }
   };
 
+  function handleButtonClick() {
+
+    const reverseAnimation = -1;
+    const normalAnimation = 1;
+
+    setAnimationState({
+      ...setAnimationState,
+      direction: animationState.direction === normalAnimation
+        ? reverseAnimation
+        : normalAnimation,
+    })
+
+    setLikeState(!isLiked)
+    LikeButton(pokemon)
+
+  }
+
   function LikeButton() {
-    if (!favorites.includes(pokemon.name)) setFavorites([...favorites, pokemon.name]);
-    localStorage.setItem('favorite', favorites);
-    console.log(favorites);
+    if (!favorites.includes(pokemon)) setFavorites([...favorites, pokemon]);
+    localStorage.setItem ('favorite', JSON.stringify(pokemon));
+    
+
+    console.log(pokemon);
   }
 
   return (
     <div className="flip-container">
-      <button className="btn-favorite" type='button' onClick={() => {
-        const reverseAnimation = -1;
-        const normalAnimation = 1;
-
-        setAnimationState({
-          ...setAnimationState,
-          direction: false,
-          direction: animationState.direction === normalAnimation
-            ? reverseAnimation
-            : normalAnimation,
-        })
-
-        setLikeState(!isLiked)
-        LikeButton(pokemon.name)
-      }}>
+      <button className="btn-favorite" type='button' onClick={handleButtonClick}>
         <div className="animation">
           <Lottie
             options={defaultOptions}
@@ -52,8 +59,8 @@ function Card({ pokemon, favorites, setFavorites }) {
             direction={animationState.direction}
             isStopped={animationState.isStopped}
             isPaused={animationState.isPaused} />
-          </div>
-         {/*  <span>
+        </div>
+        {/*  <span>
             {isLiked ? 1 : 0}
           </span> */}
       </button>
@@ -97,5 +104,3 @@ function Card({ pokemon, favorites, setFavorites }) {
     </div>
   );
 }
-
-export default Card;
