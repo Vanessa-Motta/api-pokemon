@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import typeColors from '../../helpers/typeColors'
 import Lottie from 'react-lottie';
 import './style.css';
 import animationData from '../Card/animation.json'
-import Favorite from "../Favorite/Favorite";
-
 
 export default function Card({ pokemon }) {
   const [isLiked, setLikeState] = useState(false);
@@ -24,7 +22,6 @@ export default function Card({ pokemon }) {
   };
 
   function handleButtonClick() {
-
     const reverseAnimation = -1;
     const normalAnimation = 1;
 
@@ -34,35 +31,46 @@ export default function Card({ pokemon }) {
         ? reverseAnimation
         : normalAnimation,
     })
-
     setLikeState(!isLiked)
-    LikeButton(pokemon)
 
+    LikeButton(pokemon)
+    
   }
 
-  function LikeButton() {
-    if (!favorites.includes(pokemon)) setFavorites([...favorites, pokemon]);
-    localStorage.setItem ('favorite', JSON.stringify(pokemon));
+   useEffect(() => {
+    const pokemonFavorites = JSON.parse(
+      localStorage.getItem('favorites')
+    );
+
+    if (pokemonFavorites) {
+      setFavorites(pokemonFavorites);
+    }
+  }, []);
+ 
+  const saveToLocalStorage = (item) => {
+    localStorage.setItem('favorite', JSON.stringify(item));
+  };
+
+ const LikeButton = (pokemon) => {
+    const newFavoriteList = [...favorites, pokemon];
+    setFavorites(newFavoriteList);
+    saveToLocalStorage(newFavoriteList);
+
     
 
-    console.log(pokemon);
+    // if (!favorites.includes(pokemon)) setFavorites([...favorites, pokemon]);
+    // localStorage.setItem ('favorite', JSON.stringify(pokemon));
+    console.log(newFavoriteList);
   }
-
+  
+ 
+  
   return (
     <div className="flip-container">
       <button className="btn-favorite" type='button' onClick={handleButtonClick}>
         <div className="animation">
-          <Lottie
-            options={defaultOptions}
-            width={50}
-            height={50}
-            direction={animationState.direction}
-            isStopped={animationState.isStopped}
-            isPaused={animationState.isPaused} />
+          <Lottie options={defaultOptions} width={50} height={50} direction={animationState.direction} isStopped={animationState.isStopped} isPaused={animationState.isPaused} />
         </div>
-        {/*  <span>
-            {isLiked ? 1 : 0}
-          </span> */}
       </button>
       <div className="flipper">
         <div className="front">

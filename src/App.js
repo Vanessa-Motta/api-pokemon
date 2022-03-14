@@ -3,6 +3,7 @@ import { getPokemon, getAllPokemon } from './services/pokemon';
 import Home from './components/Home/Home';
 import Favorite from './components/Favorite/Favorite';
 import Footer from './components/Footer/Footer';
+import Dashboard from './components/Dashboard/Dashboard'
 import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
@@ -11,7 +12,7 @@ export default function App() {
   const [nextUrl, setNextUrl] = useState('');
   const [prevUrl, setPrevUrl] = useState('');
   const [loading, setLoading] = useState(true);
-  const initialURL = 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=20'
+  const initialURL = 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=6'
 
   useEffect(() => {
     async function fetchData() {
@@ -49,23 +50,24 @@ export default function App() {
       return pokemonRecord
     }))
     setPokemonData(_pokemonData);
+
+    console.log(_pokemonData)
   }
-
-
 
   return (
     <>
       <header className='header'>
-        <Link className='link' to='/Home'>Página Inicial</Link>
-        <Link className='link' to='/Favorite'>Favoritos</Link>
+        <Link className='link' to='/Home'>Lista de Pokémon</Link>
+        <Link className='link' to='/Favorite'>Meus Favoritos</Link>
       </header>
       <main>
         <Routes>
-          <Route path='Home' element={<Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
           <Route path='Favorite' element={<Favorite />} />
+          <Route path='Home' element={<Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
         </Routes>
+        <Dashboard />
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 }
