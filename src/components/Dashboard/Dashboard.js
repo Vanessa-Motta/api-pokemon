@@ -16,7 +16,7 @@ export default function Dashboard(){
   return(
     <div>
        <h1 className='h1'>Bem-vindo a minha Pokedex!</h1>
-       <Lottie options={defaultOptions} width={500} height={500} />
+       <Lottie options={defaultOptions} width={450} height={450} />
     </div>
   )
 }
