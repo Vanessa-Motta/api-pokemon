@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard'
 import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
-export default function App() {
+export default function App({favourites, setFavourites}) {
   const [pokemonData, setPokemonData] = useState([])
   const [nextUrl, setNextUrl] = useState('');
   const [prevUrl, setPrevUrl] = useState('');
@@ -61,7 +61,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path='/' element={<Dashboard />} />
-          <Route path='Favorite' element={<Favorite />} />
+          <Route path='Favorite' element={<Favorite pokemon={favourites} />} />
           <Route path='Home' element={<Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
         </Routes>
       </main>

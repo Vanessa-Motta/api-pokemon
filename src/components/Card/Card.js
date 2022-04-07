@@ -6,7 +6,7 @@ import animationData from '../Card/animation.json'
 
 export default function Card({ pokemon }) {
   const [isLiked, setLikeState] = useState(false);
-  const [favorites, setFavorites] = useState([]);
+  const [favourites, setFavorites] = useState([]);
   const [animationState, setAnimationState] = useState({
     isStopped: true, isPaused: false,
     direction: -1,
@@ -39,7 +39,7 @@ export default function Card({ pokemon }) {
 
    useEffect(() => {
     const pokemonFavorites = JSON.parse(
-      localStorage.getItem('favorites')
+      localStorage.getItem('api-pokemon-favourites')
     );
 
     if (pokemonFavorites) {
@@ -48,23 +48,24 @@ export default function Card({ pokemon }) {
   }, []);
  
   const saveToLocalStorage = (item) => {
-    localStorage.setItem('favorite', JSON.stringify(item));
+    localStorage.setItem('api-pokemon-favourites', JSON.stringify(item));
   };
 
  const LikeButton = (pokemon) => {
-    const newFavoriteList = [...favorites, pokemon];
+    const newFavoriteList = [...favourites, pokemon];
     setFavorites(newFavoriteList);
     saveToLocalStorage(newFavoriteList);
 
     
 
-    // if (!favorites.includes(pokemon)) setFavorites([...favorites, pokemon]);
+    // if (!favourites.includes(pokemon)) setFavorites([...favourites, pokemon]);
     // localStorage.setItem ('favorite', JSON.stringify(pokemon));
-    console.log(newFavoriteList);
+    
   }
   
- 
-  
+
+  console.log(pokemon)
+
   return (
     <div className="flip-container">
       <button className="btn-favorite" type='button' onClick={handleButtonClick}>

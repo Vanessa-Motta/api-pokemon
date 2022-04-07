@@ -7,7 +7,7 @@ export default function Favorite() {
  
   return (
     <div className="favorite">
-      <h1>MEUS FAVORITOS</h1>
+      <h1>Em Construção...</h1>
     </div>
   );
 }
