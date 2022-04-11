@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getPokemon, getAllPokemon } from './services/pokemon';
-import Home from './components/Home/Home';
+import PokemonList from './components/PokemonList/PokemonList';
 import Favorite from './components/Favorite/Favorite';
 import Dashboard from './components/Dashboard/Dashboard'
 import { Routes, Route, Link } from 'react-router-dom';
@@ -55,14 +55,14 @@ export default function App({favourites, setFavourites}) {
     <>
       <header className='header'>
         <Link className='link' to='/'>Home</Link>
-        <Link className='link' to='/Home'>Pokémon's</Link>
+        <Link className='link' to='/PokemonList'>Pokémon's</Link>
         <Link className='link' to='/Favorite'>Favoritos</Link>
       </header>
       <main>
         <Routes>
           <Route path='/' element={<Dashboard />} />
           <Route path='Favorite' element={<Favorite pokemon={favourites} />} />
-          <Route path='Home' element={<Home next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
+          <Route path='PokemonList' element={<PokemonList next={next} prev={prev} pokemonData={pokemonData} loading={loading} />} />
         </Routes>
       </main>
     </>
